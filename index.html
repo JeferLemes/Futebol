@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Bola no Guarani</title>
+<title>Gostou do vídeo?</title>
 <style>
   :root{
-    --grama-1:#1f6b3a;
-    --grama-2:#28803f;
-    --linha:#eef7ee;
-    --carvao:#12241a;
+    --fundo-1:#4a2e18;
+    --fundo-2:#663f21;
+    --carvao:#1a100a;
     --amarelo:#f2c14e;
     --vermelho:#c1432f;
-    --creme:#f4f1e6;
+    --verde:#28803f;
+    --creme:#fdfaf3;
   }
 
   *{box-sizing:border-box;}
@@ -26,33 +26,15 @@
     font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
     background:
       repeating-linear-gradient(
-        90deg,
-        var(--grama-1) 0px,
-        var(--grama-1) 60px,
-        var(--grama-2) 60px,
-        var(--grama-2) 120px
+        45deg,
+        var(--fundo-1) 0px,
+        var(--fundo-1) 40px,
+        var(--fundo-2) 40px,
+        var(--fundo-2) 80px
       );
     min-height:100vh;
     overflow:hidden;
     position:relative;
-  }
-
-  /* linhas de campo */
-  .campo-linha{
-    position:fixed;
-    border:3px solid rgba(255,255,255,0.35);
-    pointer-events:none;
-  }
-  .linha-central{
-    top:0; bottom:0; left:50%;
-    width:0; border-left:3px solid rgba(255,255,255,0.35);
-    transform:translateX(-50%);
-  }
-  .circulo-central{
-    top:50%; left:50%;
-    width:180px; height:180px;
-    border-radius:50%;
-    transform:translate(-50%,-50%);
   }
 
   .cena{
@@ -67,11 +49,11 @@
   .cartao{
     background:var(--creme);
     border-radius:18px;
-    padding:40px 32px 48px;
+    padding:36px 28px;
     max-width:420px;
     width:100%;
     text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
     border:4px solid var(--carvao);
     position:relative;
     z-index:2;
@@ -91,8 +73,14 @@
     border:2px solid var(--carvao);
   }
 
+  .emoji-topo{
+    font-size:48px;
+    margin-bottom:12px;
+    display:block;
+  }
+
   h1{
-    font-size:26px;
+    font-size:24px;
     line-height:1.35;
     color:var(--carvao);
     margin:0 0 8px;
@@ -104,9 +92,9 @@
   }
 
   .sub{
-    color:#4a5a4f;
+    color:#5a4a3f;
     font-size:14px;
-    margin:0 0 32px;
+    margin:0 0 28px;
   }
 
   .botoes{
@@ -130,12 +118,11 @@
   }
 
   #simBtn{
-    background:var(--grama-2);
+    background:var(--verde);
     color:white;
   }
   #simBtn:hover{
     transform:scale(1.05);
-    background:var(--grama-1);
   }
 
   #naoBtn{
@@ -158,7 +145,7 @@
     font-style:italic;
   }
 
-  /* tela de agradecimento */
+  /* Tela de agradecimento */
   .cartao.oculto{
     display:none;
   }
@@ -171,17 +158,28 @@
     display:block;
   }
 
-  .bola{
-    font-size:56px;
+  .cavalo-sorriso{
+    font-size:72px;
     margin-bottom:8px;
-    animation:quicar 1.1s ease-in-out infinite;
+    display:inline-block;
+    animation:balancar 0.8s infinite alternate ease-in-out;
   }
 
-  @keyframes quicar{
-    0%,100%{ transform:translateY(0) scale(1,1); }
-    45%{ transform:translateY(-22px) scale(1,1); }
-    50%{ transform:translateY(-22px) scale(1.05,0.95); }
-    100%{ transform:translateY(0); }
+  @keyframes balancar{
+    0%{ transform:rotate(-8deg) scale(1); }
+    100%{ transform:rotate(8deg) scale(1.1); }
+  }
+
+  .balao-fala{
+    background:#eef7ee;
+    border:3px solid var(--carvao);
+    border-radius:12px;
+    padding:14px;
+    margin:16px 0;
+    font-size:18px;
+    font-weight:800;
+    color:var(--carvao);
+    position:relative;
   }
 
   .selo-final{
@@ -194,60 +192,48 @@
     padding:8px 16px;
     border-radius:8px;
     font-weight:800;
-    margin-top:22px;
+    margin-top:12px;
     border:2px solid var(--amarelo);
   }
 
-  .detalhe{
-    text-align:left;
-    background:#eef0e6;
-    border:2px dashed #9aa896;
-    border-radius:10px;
-    padding:14px 16px;
-    margin-top:20px;
-    font-size:13.5px;
-    color:#3d4a3f;
-    line-height:1.5;
-  }
-  .detalhe b{ color:var(--carvao); }
-
   @media (prefers-reduced-motion: reduce){
-    .bola{ animation:none; }
+    .cavalo-sorriso{ animation:none; }
     #naoBtn.fugindo{ transition:none; }
   }
 </style>
 </head>
 <body>
 
-<div class="campo-linha linha-central"></div>
-<div class="campo-linha circulo-central"></div>
-
 <div class="cena">
 
+  <!-- Cartão de Pergunta -->
   <div class="cartao" id="cartaoPergunta">
-    <span class="selo">Convite oficial de pelada</span>
-    <h1>Posso ir jogar bola no <span class="destaque">Guarani</span> hoje às <span class="destaque">19h</span>?</h1>
-    <p class="sub">Responda com sinceridade. O campo está me esperando.</p>
+    <span class="emoji-topo">🐴</span>
+    <span class="selo">Pergunta Importante</span>
+    <h1>Gostou do <span class="destaque">vídeo do cavalo</span>?</h1>
+    <p class="sub">Seja honesto(a). Sua resposta é muito importante!</p>
 
     <div class="botoes">
-      <button id="simBtn" onclick="confirmar()">Sim</button>
+      <button id="simBtn" onclick="confirmar()">Sim!</button>
       <button id="naoBtn">Não</button>
     </div>
 
     <p class="aviso-fuga" id="avisoFuga"></p>
   </div>
 
+  <!-- Tela de Agradecimento -->
   <div class="cartao tela-obrigado" id="telaObrigado">
-    <div class="bola">⚽</div>
-    <span class="selo">Confirmado</span>
-    <h1>Compromisso marcado no Guarani às 19h.</h1>
-    <p class="sub">Obrigado por dizer sim.</p>
-
-    <div class="detalhe">
-      <b>Atenção:</b> essa decisão é <b>irrevogável</b>. Não existe "ih, surgiu um perrengue", "vou ver depois" ou "te aviso mais tarde". Você já disse sim, o compromisso está selado e a chuteira já foi calçada mentalmente.
+    <div class="cavalo-sorriso">🐴😁</div>
+    <span class="selo">Resposta Registrada</span>
+    
+    <div class="balao-fala">
+      "MUUUUUITO OBRIGADO! 🐴❤️"
     </div>
 
-    <span class="selo-final">Presença garantida ✅</span>
+    <h1>Eu sabia que você ia gostar!</h1>
+    <p class="sub">O cavalo ficou extremamente feliz com a sua aprovação!</p>
+
+    <span class="selo-final">Aprovado pelo Cavalo ✅</span>
   </div>
 
 </div>
@@ -257,18 +243,17 @@
   const aviso = document.getElementById('avisoFuga');
 
   const frasesFuga = [
-    "Ele fugiu de novo...",
-    "Quase! Mas não foi dessa vez.",
-    "O 'Não' não quer ser clicado.",
-    "Ele é mais rápido que zagueiro cansado.",
-    "Insistência não vai adiantar aqui.",
-    "Foge que nem contra-ataque."
+    "Opção inválida! Tente o 'Sim'.",
+    "O 'Não' correu pra longe!",
+    "Nem tente clicar aqui!",
+    "Esse botão e trote rápido demais...",
+    "Você não tem escolha!",
+    "A resposta certa é SIM!"
   ];
 
   let capturasEvitadas = 0;
 
   function fugir(){
-    // pega tamanho do botão e da tela
     const largura = naoBtn.offsetWidth || 110;
     const altura = naoBtn.offsetHeight || 54;
     const margem = 16;
@@ -287,14 +272,14 @@
     aviso.textContent = frasesFuga[(capturasEvitadas - 1) % frasesFuga.length];
   }
 
-  // foge ao passar o mouse ou tocar perto (antes do clique completar)
+  // Foge ao passar o mouse ou ao tocar na tela
   naoBtn.addEventListener('mouseenter', fugir);
   naoBtn.addEventListener('touchstart', function(e){
     e.preventDefault();
     fugir();
   }, {passive:false});
 
-  // garantia extra: se de alguma forma o clique acontecer, foge e não confirma nada
+  // Garantia extra: impede o clique de qualquer forma
   naoBtn.addEventListener('click', function(e){
     e.preventDefault();
     fugir();
